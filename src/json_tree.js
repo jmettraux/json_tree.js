@@ -149,15 +149,15 @@ let JsonTree = (function() {
    * ...}
    *
    * Markup:
-   * <li class="jsontree_node [jsontree_node_expanded]">
-   *   <span class="jsontree_label-wrapper">
-   *     <span class="jsontree_label">
-   *       <span class="jsontree_expand-button" />
+   * <li class="json_tree_node [json_tree_node_expanded]">
+   *   <span class="json_tree_label-wrapper">
+   *     <span class="json_tree_label">
+   *       <span class="json_tree_expand-button" />
    *       "label"
    *     </span>
    *     :
    *   </span>
-   *   <(div|span) class="jsontree_value jsontree_value_(object|array|boolean|null|number|string)">
+   *   <(div|span) class="json_tree_value json_tree_value_(object|array|boolean|null|number|string)">
    *     ...
    *   </(div|span)>
    * </li>
@@ -195,12 +195,12 @@ let JsonTree = (function() {
    * value = string || number || boolean || null
    *
    * Markup:
-   * <li class="jsontree_node">
-   *   <span class="jsontree_label-wrapper">
-   *     <span class="jsontree_label">"age"</span>
+   * <li class="json_tree_node">
+   *   <span class="json_tree_label-wrapper">
+   *     <span class="json_tree_label">"age"</span>
    *     :
    *   </span>
-   *   <span class="jsontree_value jsontree_value_(number|boolean|string|null)">25</span>
+   *   <span class="json_tree_value json_tree_value_(number|boolean|string|null)">25</span>
    *   ,
    * </li>
    *
@@ -220,13 +220,13 @@ let JsonTree = (function() {
       labelEl,
       template = function(label, val) {
         let str = '\
-          <span class="jsontree_label-wrapper">\
-            <span class="jsontree_label">"' +
+          <span class="json_tree_label-wrapper">\
+            <span class="json_tree_label">"' +
               label +
             '"</span> : \
           </span>\
-          <span class="jsontree_value-wrapper">\
-            <span class="jsontree_value jsontree_value_' + self.type + '">' +
+          <span class="json_tree_value-wrapper">\
+            <span class="json_tree_value json_tree_value_' + self.type + '">' +
               val +
             '</span>' +
             (!isLast ? ',' : '') +
@@ -238,12 +238,12 @@ let JsonTree = (function() {
     self.label = label;
     self.isComplex = false;
 
-    el.classList.add('jsontree_node');
+    el.classList.add('json_tree_node');
     el.innerHTML = template(label, val);
 
     self.el = el;
 
-    labelEl = el.querySelector('.jsontree_label');
+    labelEl = el.querySelector('.json_tree_label');
 
     labelEl.addEventListener('click', function(e) {
       if (e.altKey) {
@@ -267,19 +267,19 @@ let JsonTree = (function() {
      * Mark node
      */
     mark : function() {
-      this.el.classList.add('jsontree_node_marked'); },
+      this.el.classList.add('json_tree_node_marked'); },
 
     /**
      * Unmark node
      */
     unmark : function() {
-      this.el.classList.remove('jsontree_node_marked'); },
+      this.el.classList.remove('json_tree_node_marked'); },
 
     /**
      * Mark or unmark node
      */
     toggleMarked : function() {
-      this.el.classList.toggle('jsontree_node_marked'); },
+      this.el.classList.toggle('json_tree_node_marked'); },
 
     /**
      * Expands parent node of this node
@@ -408,17 +408,17 @@ let JsonTree = (function() {
    * value = object || array
    *
    * Markup:
-   * <li class="jsontree_node jsontree_node_(object|array) [expanded]">
-   *   <span class="jsontree_label-wrapper">
-   *     <span class="jsontree_label">
-   *       <span class="jsontree_expand-button" />
+   * <li class="json_tree_node json_tree_node_(object|array) [expanded]">
+   *   <span class="json_tree_label-wrapper">
+   *     <span class="json_tree_label">
+   *       <span class="json_tree_expand-button" />
    *       "label"
    *     </span>
    *     :
    *   </span>
-   *   <div class="jsontree_value">
+   *   <div class="json_tree_value">
    *     <b>{</b>
-   *     <ul class="jsontree_child-nodes" />
+   *     <ul class="json_tree_child-nodes" />
    *     <b>}</b>
    *     ,
    *   </div>
@@ -440,20 +440,20 @@ let JsonTree = (function() {
       template = function(label, sym) {
         let comma = ( ! isLast) ? ',' : '',
           str = '\
-            <div class="jsontree_value-wrapper">\
-              <div class="jsontree_value jsontree_value_' + self.type + '">\
+            <div class="json_tree_value-wrapper">\
+              <div class="json_tree_value json_tree_value_' + self.type + '">\
                 <b>' + sym[0] + '</b>\
-                <span class="jsontree_show-more">&hellip;</span>\
-                <ul class="jsontree_child-nodes"></ul>\
+                <span class="json_tree_show-more">&hellip;</span>\
+                <ul class="json_tree_child-nodes"></ul>\
                 <b>' + sym[1] + '</b>' +
               '</div>' + comma +
             '</div>';
 
         if (label !== null) {
           str = '\
-            <span class="jsontree_label-wrapper">\
-              <span class="jsontree_label">' +
-                '<span class="jsontree_expand-button"></span>' +
+            <span class="json_tree_label-wrapper">\
+              <span class="json_tree_label">' +
+                '<span class="json_tree_expand-button"></span>' +
                 '"' + label +
               '"</span> : \
             </span>' + str;
@@ -469,15 +469,15 @@ let JsonTree = (function() {
     self.label = label;
     self.isComplex = true;
 
-    el.classList.add('jsontree_node');
-    el.classList.add('jsontree_node_complex');
+    el.classList.add('json_tree_node');
+    el.classList.add('json_tree_node_complex');
     el.innerHTML = template(label, self.sym);
 
-    childNodesUl = el.querySelector('.jsontree_child-nodes');
+    childNodesUl = el.querySelector('.json_tree_child-nodes');
 
     if (label !== null) {
-      labelEl = el.querySelector('.jsontree_label');
-      moreContentEl = el.querySelector('.jsontree_show-more');
+      labelEl = el.querySelector('.json_tree_label');
+      moreContentEl = el.querySelector('.json_tree_show-more');
 
       labelEl.addEventListener('click', function(e) {
         if (e.altKey) {
@@ -503,7 +503,7 @@ let JsonTree = (function() {
       self.isRoot = true;
       self.parent = null;
 
-      el.classList.add('jsontree_node_expanded');
+      el.classList.add('json_tree_node_expanded');
     }
 
     self.el = el;
@@ -516,7 +516,7 @@ let JsonTree = (function() {
 
     self.isEmpty = !Boolean(childNodes.length);
     if (self.isEmpty) {
-      el.classList.add('jsontree_node_empty');
+      el.classList.add('json_tree_node_empty');
     }
   }
 
@@ -547,7 +547,7 @@ let JsonTree = (function() {
       }
 
       if (!this.isRoot) {
-        this.el.classList.add('jsontree_node_expanded');
+        this.el.classList.add('json_tree_node_expanded');
       }
 
       if (isRecursive) {
@@ -570,7 +570,7 @@ let JsonTree = (function() {
       }
 
       if (!this.isRoot) {
-        this.el.classList.remove('jsontree_node_expanded');
+        this.el.classList.remove('json_tree_node_expanded');
       }
 
       if (isRecursive) {
@@ -593,10 +593,10 @@ let JsonTree = (function() {
         return;
       }
 
-      this.el.classList.toggle('jsontree_node_expanded');
+      this.el.classList.toggle('json_tree_node_expanded');
 
       if (isRecursive) {
-        let isExpanded = this.el.classList.contains('jsontree_node_expanded');
+        let isExpanded = this.el.classList.contains('json_tree_node_expanded');
 
         this.childNodes.forEach(function(item, i) {
           if (item.isComplex) {
@@ -682,7 +682,7 @@ let JsonTree = (function() {
    * font-size and own margins.
    *
    * Markup:
-   * <ul class="jsontree_tree clearfix">
+   * <ul class="json_tree_tree clearfix">
    *   {Node}
    * </ul>
    *
@@ -692,7 +692,7 @@ let JsonTree = (function() {
    */
   function Tree(jsonObj, domEl) {
     this.wrapper = document.createElement('ul');
-    this.wrapper.className = 'jsontree_tree clearfix';
+    this.wrapper.className = 'json_tree_tree clearfix';
 
     this.rootNode = null;
 
