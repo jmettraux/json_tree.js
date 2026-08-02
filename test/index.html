@@ -2,12 +2,91 @@
 <html>
 
   <head>
-    <title>test</title>
+    <title>json_tree.js test</title>
     <script src="src/json_tree.js"></script>
+    <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="src/json_tree.css">
   </head>
+
   <body>
-    TEST
+
+    <!-- TEST -->
+
+    <div id="tree">
+    </div>
+
+    <script defer>
+
+      let js = {
+        "string": "Lorem ipsum dolor sit amet",
+        "integer": 42,
+        "float": 3.14159,
+        "boolean_true": true,
+        "boolean_false": false,
+        "null_value": null,
+        "array": [
+          "Lorem",
+          "ipsum",
+          "dolor",
+          "sit",
+          "amet"
+        ],
+        "object": {
+          "name": "Lorem Ipsum",
+          "origin": "Cicero",
+          "year": 45
+        },
+        "nested_array_of_objects": [
+          {
+            "id": 1,
+            "title": "Lorem ipsum dolor",
+            "published": true,
+            "rating": 4.5,
+            "tags": ["lorem", "ipsum"],
+            "meta": null
+          },
+          {
+            "id": 2,
+            "title": "Consectetur adipiscing elit",
+            "published": false,
+            "rating": 3.7,
+            "tags": ["dolor", "sit", "amet"],
+            "meta": null
+          }
+        ],
+        "deeply_nested": {
+          "level_1": {
+            "level_2": {
+              "level_3": {
+                "message": "Sed ut perspiciatis unde omnis",
+                "value": 99,
+                "active": true,
+                "data": null,
+                "items": [1, 2, 3]
+              }
+            }
+          }
+        },
+        "mixed_array": [
+          "Lorem ipsum",
+          42,
+          3.14,
+          true,
+          false,
+          null,
+          { "key": "value" },
+          [1, 2, 3]
+        ],
+        "empty_object": {},
+        "empty_array": [],
+        "large_integer": 1000000,
+        "negative_integer": -7,
+        "negative_float": -2.718,
+        "scientific_notation": 1.5e10,
+        "zero": 0 };
+
+      JsonTree.create(js, document.getElementById('tree'));
+    </script>
   </body>
 </html>
 
