@@ -32,30 +32,22 @@ let JsonTree = (function() {
      * @returns {string} ("object" | "array" | "null" | "boolean" | "number" | "string")
      */
     getType : function(val) {
-      if (val === null) {
-        return 'null';
-      }
 
-      switch (typeof val) {
+      if (val === null) return 'null';
+      if (Array.isArray(val)) return 'array';
+
+      let t = typeof val;
+      switch (t) {
         case 'number':
-          return 'number';
-
         case 'string':
-          return 'string';
-
-        case 'boolean':
-          return 'boolean';
+        case 'boolean': return t;
       }
 
-      switch(utils.getClass(val)) {
-        case '[object Array]':
-          return 'array';
+      let c = utils.getClass(val);
 
-        case '[object Object]':
-          return 'object';
-      }
+      if (c === '[object Object]') return 'object';
 
-      throw new Error('Bad type: ' + utils.getClass(val));
+      throw new Error(`Bad type: ${c}`);
     },
 
     /**
