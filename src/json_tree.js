@@ -41,7 +41,8 @@ let JsonTree = (function() {
      * In other cases - throws an exception
      *
      * @param val {any type} - the value for new node
-     * @returns {string} ("object" | "array" | "null" | "boolean" | "number" | "string")
+     * @returns {string} ("object" | "array" | "null" | "boolean" | "number" |
+     *     "string")
      */
     getType : function(val) {
 
@@ -71,8 +72,8 @@ let JsonTree = (function() {
      */
     forEachNode : function(obj, func) {
 
-      let type = utils.getType(obj),
-        isLast;
+      let type = utils.getType(obj);
+      let isLast;
 
       switch (type) {
         case 'array':
@@ -154,13 +155,14 @@ let JsonTree = (function() {
    *     </span>
    *     :
    *   </span>
-   *   <(div|span) class="json_tree_value json_tree_value_(object|array|boolean|null|number|string)">
+   *   <(div|span) class="json_tree_value json_tree_value_(object|array|
+   *       boolean|null|number|string)">
    *     ...
    *   </(div|span)>
    * </li>
    *
    * @param label {string} - key name
-   * @param val {Object | Array | string | number | boolean | null} - a value of node
+   * @param val {Object | Array | string | number | boolean | null} - node value
    * @param isLast {boolean} - true if node is last in list of siblings
    *
    * @return {Node}
@@ -197,7 +199,8 @@ let JsonTree = (function() {
    *     <span class="json_tree_label">"age"</span>
    *     :
    *   </span>
-   *   <span class="json_tree_value json_tree_value_(number|boolean|string|null)">25</span>
+   *   <span class="json_tree_value json_tree_value_(number|boolean|string|null
+   *     )">25</span>
    *   ,
    * </li>
    *
@@ -226,7 +229,7 @@ let JsonTree = (function() {
             <span class="json_tree_value json_tree_value_' + self.type + '">' +
               val +
             '</span>' +
-            (!isLast ? ',' : '') +
+            ( ! isLast ? ',' : '') +
           '</span>';
 
         return str;
@@ -514,7 +517,7 @@ let JsonTree = (function() {
       self.addChild(new Node(label, node, isLast));
     });
 
-    self.isEmpty = !Boolean(childNodes.length);
+    self.isEmpty = ! Boolean(childNodes.length);
     if (self.isEmpty) {
       el.classList.add('json_tree_node_empty');
     }
@@ -523,6 +526,7 @@ let JsonTree = (function() {
   utils.inherits(_NodeComplex, _NodeSimple);
 
   utils.extend(_NodeComplex.prototype, {
+
     constructor : _NodeComplex,
 
     /*
@@ -547,7 +551,7 @@ let JsonTree = (function() {
         return;
       }
 
-      if (!this.isRoot) {
+      if ( ! this.isRoot) {
         this.el.classList.add('json_tree_node_expanded');
       }
 
@@ -566,11 +570,12 @@ let JsonTree = (function() {
      * @param isRecursive {boolean} - if true, collapses all child nodes
      */
     collapse : function(isRecursive) {
+
       if (this.isEmpty) {
         return;
       }
 
-      if (!this.isRoot) {
+      if ( ! this.isRoot) {
         this.el.classList.remove('json_tree_node_expanded');
       }
 
@@ -647,7 +652,8 @@ let JsonTree = (function() {
    * @param isLast {boolean} - true if node is last in list of siblings
    */
   function NodeObject(label, val, isLast) {
-    this.sym = ['{', '}'];
+
+    this.sym = [ '{', '}' ];
     this.type = "object";
 
     _NodeComplex.call(this, label, val, isLast);
@@ -668,7 +674,8 @@ let JsonTree = (function() {
    * @param isLast {boolean} - true if node is last in list of siblings
    */
   function NodeArray(label, val, isLast) {
-    this.sym = ['[', ']'];
+
+    this.sym = [ '[', ']' ];
     this.type = "array";
 
     _NodeComplex.call(this, label, val, isLast);
@@ -694,6 +701,7 @@ let JsonTree = (function() {
    * @param domEl {DOMElement} - DOM-element, wrapper for tree
    */
   function Tree(jsonObj, domEl) {
+
     this.wrapper = document.createElement('ul');
     this.wrapper.className = 'json_tree_tree clearfix';
 
@@ -706,6 +714,7 @@ let JsonTree = (function() {
   }
 
   Tree.prototype = {
+
     constructor : Tree,
 
     /**
