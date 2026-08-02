@@ -230,13 +230,14 @@ let JsonTree = (function() {
 
     labelEl = el.querySelector('.json_tree_label');
 
-    labelEl.addEventListener('click', function(e) {
-      if (e.altKey) {
+    labelEl.addEventListener('click', function(ev) {
+
+      if (ev.altKey) {
         self.toggleMarked();
         return;
       }
 
-      if (e.shiftKey) {
+      if (ev.shiftKey) {
         document.getSelection().removeAllRanges();
         alert(self.getJSONPath());
         return;
@@ -292,7 +293,7 @@ let JsonTree = (function() {
       let currentPath;
 
       if (this.parent.type === 'array') {
-        currentPath = "[" + this.label + "]";
+        currentPath = `[${this.label}]`;
       } else {
         currentPath = isInDotNotation ? `.${this.label}` : `['${this.label}']`;
       }
@@ -465,27 +466,31 @@ let JsonTree = (function() {
       labelEl = el.querySelector('.json_tree_label');
       moreContentEl = el.querySelector('.json_tree_show-more');
 
-      labelEl.addEventListener('click', function(e) {
-        if (e.altKey) {
+      labelEl.addEventListener('click', function(ev) {
+
+        if (ev.altKey) {
           self.toggleMarked();
           return;
         }
 
-        if (e.shiftKey) {
+        if (ev.shiftKey) {
           document.getSelection().removeAllRanges();
           alert(self.getJSONPath());
           return;
         }
 
-        self.toggle(e.ctrlKey || e.metaKey);
+        self.toggle(ev.ctrlKey || ev.metaKey);
       }, false);
 
-      moreContentEl.addEventListener('click', function(e) {
-        self.toggle(e.ctrlKey || e.metaKey);
+      moreContentEl.addEventListener('click', function(ev) {
+
+        self.toggle(ev.ctrlKey || ev.metaKey);
       }, false);
 
       self.isRoot = false;
+
     } else {
+
       self.isRoot = true;
       self.parent = null;
 
