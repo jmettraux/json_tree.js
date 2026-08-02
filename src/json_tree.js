@@ -486,12 +486,12 @@ let JsonTree = (function() {
 
         if (ev.altKey) { self.toggleMarked(); return; }
 
-        self.toggle(ev.ctrlKey || ev.metaKey);
+        self.toggle(ev.shiftKey || ev.ctrlKey || ev.metaKey);
       }, false);
 
       moreContentEl.addEventListener('click', function(ev) {
 
-        self.toggle(ev.ctrlKey || ev.metaKey);
+        self.toggle(ev.shiftKey || ev.ctrlKey || ev.metaKey);
       }, false);
 
       self.isRoot = false;
@@ -540,6 +540,7 @@ let JsonTree = (function() {
      * @param isRecursive {boolean} - if true, expands all child nodes
      */
     expand : function(isRecursive){
+
       if (this.isEmpty) {
         return;
       }
@@ -583,10 +584,11 @@ let JsonTree = (function() {
     /*
      * Expands collapsed or collapses expanded node
      *
-     * @param {boolean} isRecursive - Expand all child nodes if this node is expanded
-     *                and collapse it otherwise
+     * @param {boolean} isRecursive - Expand all child nodes if this node
+     *     is expanded and collapse it otherwise
      */
     toggle : function(isRecursive) {
+
       if (this.isEmpty) {
         return;
       }
@@ -612,6 +614,7 @@ let JsonTree = (function() {
      * @param {boolean} isRecursive
      */
     findChildren : function(matcher, handler, isRecursive) {
+
       if (this.isEmpty) {
         return;
       }
