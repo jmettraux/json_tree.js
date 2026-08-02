@@ -292,23 +292,28 @@ let JsonTree = (function() {
     /**
      * Returns JSON-path of this
      *
-     * @param isInDotNotation {boolean} - kind of notation for returned json-path
-     *                  (by default, in bracket notation)
      * @returns {string}
      */
-    getJSONPath : function(isInDotNotation) {
+    getJSONPath : function() {
 
-      if (this.isRoot) return "$";
+      return(
+        this.isRoot ? '$' :
+        this.parent.getJSONPath() + `[${this.label}]`);
+    },
 
-      let currentPath;
+    /**
+     * Returns JSON-path of this (dot not bracket variant)
+     *
+     * @returns {string}
+     */
+    getJsPath : function() {
 
-      if (this.parent.type === 'array') {
-        currentPath = `[${this.label}]`;
-      } else {
-        currentPath = isInDotNotation ? `.${this.label}` : `['${this.label}']`;
-      }
+      if (this.isRoot) return '$';
 
-      return this.parent.getJSONPath(isInDotNotation) + currentPath;
+      return(
+        this.parent.getJsPath() + (
+          this.parent.type === 'array' ? `[${this.label}]` :
+          `.${this.label}`));
     }
   };
 
