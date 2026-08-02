@@ -60,7 +60,7 @@ let JsonTree = (function() {
 
       if (c === '[object Object]') return 'object';
 
-      throw new Error(`Bad type: ${c}`);
+      throw new Error(`Json Tree - Bad type: ${c}`);
     },
 
     /**
@@ -174,7 +174,7 @@ let JsonTree = (function() {
     if (nodeType in Node.CONSTRUCTORS) {
       return new Node.CONSTRUCTORS[nodeType](label, val, isLast);
     }
-    throw new Error('Bad type: ' + utils.getClass(val));
+    throw new Error('JsonTree - Bad type: ' + utils.getClass(val));
   }
 
   Node.CONSTRUCTORS = {
@@ -212,7 +212,7 @@ let JsonTree = (function() {
   function _NodeSimple(label, val, isLast) {
 
     if (this.constructor === _NodeSimple) {
-      throw new Error('This is abstract class');
+      throw new Error('JsonTree - This is abstract class');
     }
 
     let self = this,
@@ -434,7 +434,7 @@ let JsonTree = (function() {
   function _NodeComplex(label, val, isLast) {
 
     if (this.constructor === _NodeComplex) {
-      throw new Error('This is abstract class');
+      throw new Error('JsonTree - This is abstract class');
     }
 
     let self = this,
