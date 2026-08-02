@@ -169,12 +169,10 @@ let JsonTree = (function() {
    */
   function Node(label, val, isLast) {
 
-    let nodeType = utils.getType(val);
+    let con = Node.CONSTRUCTORS[utils.getType(val)];
+    if (con) return new con(label, val, isLast);
 
-    if (nodeType in Node.CONSTRUCTORS) {
-      return new Node.CONSTRUCTORS[nodeType](label, val, isLast);
-    }
-    throw new Error('JsonTree - Bad type: ' + utils.getClass(val));
+    throw new Error(`JsonTree - Bad type: ${utils.getClass(val)}`);
   }
 
   Node.CONSTRUCTORS = {
