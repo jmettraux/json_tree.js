@@ -85,9 +85,10 @@
         "scientific_notation": 1.5e10,
         "zero": 0 };
 
-      JsonTree.create(js, document.getElementById('tree'));
+      //JsonTree.create(js, document.getElementById('tree'));
+      JsonTree.create(document.getElementById('tree'), js);
 
-      JsonTree.create('foobar', document.getElementById('tree'));
+      //JsonTree.create('foobar', document.getElementById('tree'));
         // just fails, throwing an error ;-)
     </script>
   </body>

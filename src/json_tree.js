@@ -14,6 +14,15 @@ let JsonTree = (function() {
   /* ---------- Utilities ---------- */
   let utils = {
 
+    isDomElement : function(o) {
+
+      return (
+        (o !== null) &&
+        (typeof o === 'object') &&
+        (typeof o.tagName === 'string') &&
+        (typeof o.getElementsByClassName === 'function'));
+    },
+
     /*
      * Returns js-"class" of value
      *
@@ -21,6 +30,7 @@ let JsonTree = (function() {
      * @returns {string} - for example, "[object Function]"
      */
     getClass : function(val) {
+
       return Object.prototype.toString.call(val);
     },
 
@@ -805,9 +815,13 @@ let JsonTree = (function() {
      * @param domEl {DOMElement} - the wrapper element
      * @returns {Tree}
      */
-    create : function(jsonObj, domEl) {
+    create : function(/*jsonObj, domEl*/) {
 
-      return new Tree(jsonObj, domEl);
+      let a = Array.from(arguments);
+      let e = a.find(function(e) { return utils.isDomElement(e); });
+      let j = a.find(function(e) { return ! utils.isDomElement(e); });
+
+      return new Tree(j, e);
     }
   };
 })();
