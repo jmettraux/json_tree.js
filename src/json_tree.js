@@ -11,6 +11,8 @@
 
 let JsonTree = (function() {
 
+  let VERSION = '1.0.0';
+
   /* ---------- Utilities ---------- */
   let utils = {
 
