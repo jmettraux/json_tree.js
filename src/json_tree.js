@@ -58,6 +58,7 @@ let JsonTree = (function() {
      * @param func {Function} - the function for each item
      */
     forEachNode : function(obj, func) {
+
       let type = utils.getType(obj),
         isLast;
 
@@ -104,22 +105,6 @@ let JsonTree = (function() {
         Child.prototype.constructor = Child;
       };
     })(),
-
-    /*
-     * Checks for a valid type of root node*
-     *
-     * @param {any type} jsonObj - a value for root node
-     * @returns {boolean} - true for an object or an array, false otherwise
-     */
-    isValidRoot : function(jsonObj) {
-      switch (utils.getType(jsonObj)) {
-        case 'object':
-        case 'array':
-          return true;
-        default:
-          return false;
-      }
-    },
 
     /**
      * Extends some object
@@ -476,6 +461,7 @@ let JsonTree = (function() {
     childNodesUl = el.querySelector('.json_tree_child-nodes');
 
     if (label !== null) {
+
       labelEl = el.querySelector('.json_tree_label');
       moreContentEl = el.querySelector('.json_tree_show-more');
 
@@ -711,9 +697,12 @@ let JsonTree = (function() {
      * @param {Object | Array} jsonObj - json-data
      */
     loadData : function(jsonObj) {
-      if (!utils.isValidRoot(jsonObj)) {
-        alert('The root should be an object or an array');
-        return;
+
+      let rootType = utils.getType(jsonObj);
+
+      if (rootType !== 'object' && rootType !== 'array') {
+        throw new Error(
+          `JsonTree - root not object or array but "${rootType}"`);
       }
 
       this.sourceJSONObj = jsonObj;
@@ -767,7 +756,8 @@ let JsonTree = (function() {
      * @returns {string} - for exemple, '{"a":2,"b":3}'
      */
     toSourceJSON : function(isPrettyPrinted) {
-      if (!isPrettyPrinted) {
+
+      if ( ! isPrettyPrinted) {
         return JSON.stringify(this.sourceJSONObj);
       }
 
