@@ -240,17 +240,14 @@ let JsonTree = (function() {
 
     labelEl = el.querySelector('.json_tree_label');
 
+    labelEl.addEventListener('mouseenter', function(ev) {
+
+      self.el.title = self.el.title || self.getJsPath();
+    });
+
     labelEl.addEventListener('click', function(ev) {
 
-      if (ev.altKey) {
-        self.toggleMarked();
-        return;
-      }
-      if (ev.shiftKey) {
-        document.getSelection().removeAllRanges();
-        alert(self.getJSONPath());
-        return;
-      }
+      if (ev.altKey) { self.toggleMarked(); return; }
     }, false);
   }
 
@@ -480,18 +477,14 @@ let JsonTree = (function() {
       labelEl = el.querySelector('.json_tree_label');
       moreContentEl = el.querySelector('.json_tree_show-more');
 
+      labelEl.addEventListener('mouseenter', function(ev) {
+
+        self.el.title = self.el.title || self.getJsPath();
+      });
+
       labelEl.addEventListener('click', function(ev) {
 
-        if (ev.altKey) {
-          self.toggleMarked();
-          return;
-        }
-
-        if (ev.shiftKey) {
-          document.getSelection().removeAllRanges();
-          alert(self.getJSONPath());
-          return;
-        }
+        if (ev.altKey) { self.toggleMarked(); return; }
 
         self.toggle(ev.ctrlKey || ev.metaKey);
       }, false);
