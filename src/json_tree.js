@@ -246,7 +246,6 @@ let JsonTree = (function() {
         self.toggleMarked();
         return;
       }
-
       if (ev.shiftKey) {
         document.getSelection().removeAllRanges();
         alert(self.getJSONPath());
@@ -336,7 +335,7 @@ let JsonTree = (function() {
 
     _NodeSimple.call(this, label, val, isLast);
   }
-  utils.inherits(NodeBoolean,_NodeSimple);
+  utils.inherits(NodeBoolean, _NodeSimple);
 
 
   /*
@@ -357,7 +356,7 @@ let JsonTree = (function() {
 
     _NodeSimple.call(this, label, val, isLast);
   }
-  utils.inherits(NodeNumber,_NodeSimple);
+  utils.inherits(NodeNumber, _NodeSimple);
 
 
   /*
@@ -378,7 +377,7 @@ let JsonTree = (function() {
 
     _NodeSimple.call(this, label, `"${val}"`, isLast);
   }
-  utils.inherits(NodeString,_NodeSimple);
+  utils.inherits(NodeString, _NodeSimple);
 
 
   /*
@@ -398,7 +397,7 @@ let JsonTree = (function() {
 
     _NodeSimple.call(this, label, val, isLast);
   }
-  utils.inherits(NodeNull,_NodeSimple);
+  utils.inherits(NodeNull, _NodeSimple);
 
 
   /*
@@ -655,7 +654,7 @@ let JsonTree = (function() {
 
     _NodeComplex.call(this, label, val, isLast);
   }
-  utils.inherits(NodeObject,_NodeComplex);
+  utils.inherits(NodeObject, _NodeComplex);
 
 
   /*
